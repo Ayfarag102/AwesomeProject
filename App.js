@@ -2,6 +2,7 @@ import React from "react";
 import Homepage from "./Homepage";
 //import MessagesPage from "./MessagesPage";
 import LoginPage from "./LoginPage";
+import RegisterPage from "./RegisterPage";
 
 //import { SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -17,7 +18,12 @@ const App = () => {
         <Stack.Screen
           name="Login"
           component={LoginPage}
-          options={{ title: "Sign In or Sign Up" }}
+          options={{ title: "Sign In" }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={RegisterPage}
+          options={{ title: "Sign Up" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

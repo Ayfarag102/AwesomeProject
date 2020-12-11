@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
 import moment from "moment";
 import { LineChart } from "react-native-chart-kit";
@@ -19,6 +20,41 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     fontFamily: "Avenir Next Medium",
+  },
+  login__button: {
+    backgroundColor: "rgba(52, 152, 219,1.0)",
+    marginLeft: 30,
+    marginRight: 30,
+    marginTop: 20,
+    height: 48,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  login__button__title: {
+    color: "white",
+    fontSize: 16,
+    fontFamily: "Brut Gothic",
+    fontWeight: "bold",
+    shadowColor: "black",
+  },
+
+  register__button: {
+    backgroundColor: "rgba(26, 188, 156,1.0)",
+    marginLeft: 30,
+    marginRight: 30,
+    marginTop: 20,
+    height: 48,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  register__button__title: {
+    color: "white",
+    fontSize: 16,
+
+    fontFamily: "Brut Gothic",
+    fontWeight: "bold",
   },
   subtitleTexts: {
     fontFamily: "Lato",
@@ -38,8 +74,10 @@ const styles = StyleSheet.create({
   banner: {
     backgroundColor: `#27ae60`,
   },
+
+  //rgba(22, 160, 133,1.0)
 });
-const Homepage = ({ navigation }) => {
+const Homepage = ({ navigation, props }) => {
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [total, setTotal] = useState(0);
@@ -146,7 +184,33 @@ const Homepage = ({ navigation }) => {
           🚀🚀🚀 Track Income App 🚀🚀🚀
         </Text>
       </View>
-      <Button title="Login 🙈" onPress={() => navigation.navigate("Login")} />
+      {/*Login Button*/}
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Login")}
+        style={styles.login__button}
+      >
+        <Text style={styles.login__button__title}>
+          Login <span>💵</span>
+        </Text>
+      </TouchableOpacity>
+      {/*Register Button*/}
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Register")}
+        style={styles.register__button}
+      >
+        <Text style={styles.register__button__title}>
+          Register <span>💸</span>
+        </Text>
+      </TouchableOpacity>
+
+      {/* <Button
+        title="Login 💵"
+        onPress={() => navigation.navigate("Register")}
+      /> */}
+      {/* <Button
+        title="Register 💸"
+        onPress={() => navigation.navigate("Register")}
+      /> */}
       <View>
         <Text>Your Income</Text>
         <LineChart

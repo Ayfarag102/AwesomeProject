@@ -10,7 +10,7 @@ import {
 
 import { firebase } from "./src/firebase/config";
 
-const LoginPage = ({ navigation }) => {
+const RegisterPage = ({ navigation }) => {
   const styles = StyleSheet.create({
     // container: {
     //   // flex: 2,
@@ -60,42 +60,66 @@ const LoginPage = ({ navigation }) => {
       fontFamily: "Proxima Nova",
     },
   });
+  const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const login = () => {
+  const register = () => {
+    if (password !== confirmPassword) {
+      alert("Passwords don't match.");
+      return;
+    }
+
     firebase
       .auth()
-      .signInWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(email, password)
       .then((response) => {
         const uid = response.user.uid;
+        const data = {
+          id: uid,
+          displayName,
+          username,
+          email,
+        };
+
         const usersRef = firebase.firestore().collection("users");
         usersRef
           .doc(uid)
-          .get()
-          .then((firestoreDocument) => {
-            if (!firestoreDocument.exists) {
-              alert("User does not exist");
-              return;
-            }
-            const user = firestoreDocument.data();
-            navigation.navigate("Home", { user });
+          .set(data)
+          .then(() => {
+            navigation.navigate("Home", { user: data });
           })
-          .catch((err) => {
-            alert(err);
+          .catch((er) => {
+            alert(er);
           });
       })
       .catch((err) => {
         alert(err);
       });
   };
-
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.form__inputtext}
+        value={displayName}
+        placeholder="Enter your display name"
+        placeholderTextColor="#aaaaaa"
+        onChangeText={(text) => setDisplayName(text)}
+      />
+      <TextInput
+        style={styles.form__inputtext}
+        value={username}
+        placeholder="Enter your username"
+        placeholderTextColor="#aaaaaa"
+        onChangeText={(text) => setUsername(text)}
+      />
+      <TextInput
+        style={styles.form__inputtext}
         value={email}
         placeholder="Enter your email"
+        keyboardType="email-address"
         placeholderTextColor="#aaaaaa"
         onChangeText={(text) => setEmail(text)}
       />
@@ -107,13 +131,24 @@ const LoginPage = ({ navigation }) => {
         secureTextEntry={true}
         onChangeText={(text) => setPassword(text)}
       />
+      <TextInput
+        style={styles.form__inputtext}
+        value={confirmPassword}
+        placeholder="Enter your password"
+        placeholderTextColor="#aaaaaa"
+        secureTextEntry={true}
+        onChangeText={(text) => setConfirmPassword(text)}
+      />
+
       <TouchableOpacity
-        disabled={!email && !password}
-        onPress={login}
+        disabled={
+          !displayName && !username && !email && !password && !confirmPassword
+        }
+        onPress={register}
         style={styles.form__button}
       >
         <Text style={styles.form__button__title}>
-          Login <span>🙊</span>
+          Register <span>🙊</span>
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -131,4 +166,4 @@ const LoginPage = ({ navigation }) => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

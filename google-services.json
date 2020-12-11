@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "209632596604",
+    "project_id": "rn-income-track-app",
+    "storage_bucket": "rn-income-track-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:209632596604:android:d086efacc3b273a6d2aff9",
+        "android_client_info": {
+          "package_name": "com.mxscoding.awesomeproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "209632596604-lkm8hlqatn2b0ua3jt3qvrjsnvj08q9e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB9IMQHUS_hIBCU5eyfwkWJDtmynYAGi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "209632596604-lkm8hlqatn2b0ua3jt3qvrjsnvj08q9e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "209632596604-tl1nd1j3be37qsrjoioag968g4lnih77.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mxscoding.awesomeproject"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
